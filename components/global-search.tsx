@@ -191,8 +191,8 @@ export function GlobalSearch({ open, onClose }: GlobalSearchProps) {
         href: '/roadmap?tab=power-platform', icon: Map,
       })),
       ...TECH_COMPARISON.map<SearchResult>((t, i) => ({
-        id: `tech-${i}`, group: 'Tech Comparison', label: t.requirement,
-        sublabel: `Power Platform: ${t.powerPlatform.notes.slice(0, 100)} · Custom Code: ${t.customCode.notes.slice(0, 100)}`,
+        id: `tech-${i}`, group: 'OTT vs Alternatives', label: t.feature,
+        sublabel: `${t.bhoomiputraOtt}`,
         href: '/tech-comparison?tab=comparison', icon: GitCompare,
       })),
       ...RECOMMENDED_TOOL_ROWS.map<SearchResult>((r, i) => ({

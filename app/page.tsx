@@ -164,9 +164,13 @@ const KD_ICON: Record<string, React.ElementType> = {
 
 /* ── Key Development Point Card ── */
 function KDCard({ kd }: { kd: (typeof KEY_DEVELOPMENT_POINTS)[0] }) {
-  const c = KD_COLOR[kd.color] ?? KD_COLOR.primary;
+  const levelColors: Record<string, { accent: string; bg: string; border: string; tag: string }> = {
+    critical: { accent: "#EF4444", bg: "rgba(239,68,68,0.05)", border: "rgba(239,68,68,0.18)", tag: "rgba(239,68,68,0.1)" },
+    important: { accent: "#F59E0B", bg: "rgba(245,158,11,0.05)", border: "rgba(245,158,11,0.18)", tag: "rgba(245,158,11,0.1)" },
+    info: { accent: "#06B6D4", bg: "rgba(6,182,212,0.05)", border: "rgba(6,182,212,0.18)", tag: "rgba(6,182,212,0.1)" },
+  };
+  const c = levelColors[kd.level] || levelColors.info;
   const Icon = KD_ICON[kd.icon] ?? Zap;
-  const phaseColor = kd.phase === 1 ? "#F59E0B" : "#8B5CF6";
   return (
     <div
       style={{
@@ -184,158 +188,51 @@ function KDCard({ kd }: { kd: (typeof KEY_DEVELOPMENT_POINTS)[0] }) {
       <div
         style={{
           display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-          gap: 8,
+          alignItems: "center",
+          gap: 10,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
-          <div
-            style={{
-              width: 30,
-              height: 30,
-              borderRadius: 8,
-              backgroundColor: c.tag,
-              border: `1px solid ${c.border}`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}
-          >
-            <Icon size={14} color={c.accent} />
-          </div>
-          <span
-            style={{
-              fontSize: 13,
-              fontWeight: 700,
-              color: "#E0E0E8",
-              lineHeight: 1.35,
-            }}
-          >
-            {kd.title}
-          </span>
-        </div>
         <div
           style={{
+            width: 36,
+            height: 36,
+            borderRadius: 8,
+            backgroundColor: c.tag,
+            border: `1px solid ${c.border}`,
             display: "flex",
             alignItems: "center",
-            gap: 5,
+            justifyContent: "center",
             flexShrink: 0,
           }}
         >
-          <span
+          <Icon size={16} color={c.accent} />
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <h3
             style={{
-              fontSize: 10,
+              margin: 0,
+              fontSize: 13.5,
               fontWeight: 700,
-              color: c.accent,
-              backgroundColor: c.tag,
-              padding: "2px 8px",
-              borderRadius: 9999,
-              border: `1px solid ${c.border}`,
-              letterSpacing: "0.05em",
-              textTransform: "uppercase" as const,
+              color: "#F0F0F5",
+              lineHeight: 1.3,
             }}
           >
-            {kd.tag}
-          </span>
-          <span
+            {kd.title}
+          </h3>
+          <p
             style={{
-              fontSize: 10,
-              fontWeight: 600,
-              color: phaseColor,
-              backgroundColor: `${phaseColor}15`,
-              padding: "2px 7px",
-              borderRadius: 9999,
-              border: `1px solid ${phaseColor}25`,
+              margin: 0,
+              fontSize: 12,
+              color: "#9090A8",
+              lineHeight: 1.5,
+              marginTop: 4,
             }}
           >
-            P{kd.phase}
-          </span>
+            {kd.detail}
+          </p>
         </div>
       </div>
 
-      {/* Description */}
-      <p
-        style={{
-          margin: 0,
-          fontSize: 12.5,
-          color: "#9090A8",
-          lineHeight: 1.65,
-        }}
-      >
-        {kd.description}
-      </p>
-
-      {/* Why it matters */}
-      <div
-        style={{
-          padding: "9px 12px",
-          backgroundColor: `${c.accent}08`,
-          border: `1px solid ${c.border}`,
-          borderRadius: 8,
-        }}
-      >
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 700,
-            color: c.accent,
-            textTransform: "uppercase" as const,
-            letterSpacing: "0.08em",
-            marginBottom: 4,
-          }}
-        >
-          Why it matters
-        </div>
-        <p
-          style={{ margin: 0, fontSize: 12, color: "#7A7A90", lineHeight: 1.6 }}
-        >
-          {kd.why_it_matters}
-        </p>
-      </div>
-
-      {/* Linked modules */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          flexWrap: "wrap",
-          marginTop: "auto" as const,
-          paddingTop: 4,
-          borderTop: "1px solid #1A1A22",
-        }}
-      >
-        <span
-          style={{
-            fontSize: 10,
-            color: "#4A4A5A",
-            fontWeight: 600,
-            textTransform: "uppercase" as const,
-            letterSpacing: "0.06em",
-          }}
-        >
-          Modules:
-        </span>
-        {kd.linked_modules.map((id) => (
-          <span
-            key={id}
-            style={{
-              fontSize: 10.5,
-              fontWeight: 700,
-              color: "#6A6A80",
-              backgroundColor: "#1A1A24",
-              border: "1px solid #2A2A35",
-              padding: "1px 7px",
-              borderRadius: 4,
-              fontFamily: "var(--font-mono)",
-            }}
-          >
-            M{id}
-          </span>
-        ))}
-      </div>
     </div>
   );
 }
@@ -912,8 +809,8 @@ function DashboardInner() {
                     gap: 14,
                   }}
                 >
-                  {KEY_DEVELOPMENT_POINTS.map((kd) => (
-                    <KDCard key={kd.id} kd={kd} />
+                  {KEY_DEVELOPMENT_POINTS.map((kd, i) => (
+                    <KDCard key={i} kd={kd} />
                   ))}
                 </div>
               </div>

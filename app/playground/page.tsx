@@ -33,6 +33,15 @@ const PULSE_CSS = `
 
 const OPTIMAL_SOLD_STEPS = 18;
 
+const formatTimestamp = (timestamp: number): string => {
+  const date = new Date(timestamp);
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
+  const hours = String(date.getUTCHours()).padStart(2, '0');
+  const mins = String(date.getUTCMinutes()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hours}:${mins}`;
+};
 
 interface SavedPath {
   id: string;
@@ -1211,7 +1220,7 @@ function PlaygroundInner() {
                               </span>
                             </div>
                             <div style={{ fontSize: 9, color: '#4B5563' }}>
-                              {p.history.length} steps · {new Date(p.timestamp).toLocaleString()}
+                              {p.history.length} steps · {formatTimestamp(p.timestamp)}
                             </div>
                           </button>
                         );
@@ -1665,7 +1674,7 @@ function PlaygroundInner() {
                         </span>
                       </div>
                       <div style={{ fontSize: 9, color: '#4B5563' }}>
-                        {p.history.length} steps · {new Date(p.timestamp).toLocaleString()}
+                        {p.history.length} steps · {formatTimestamp(p.timestamp)}
                       </div>
                     </button>
                     <button
