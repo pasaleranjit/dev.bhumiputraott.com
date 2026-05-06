@@ -93,14 +93,14 @@ export default function LoginPage() {
             }}
           >
             <svg width={chip.size} height={chip.size} viewBox="0 0 60 60" fill="none">
-              <rect x="15" y="15" width="30" height="30" rx="4" stroke="#22C55E" strokeWidth="1.5" />
-              <rect x="20" y="20" width="20" height="20" rx="2" fill="#22C55E" opacity="0.3" />
+              <rect x="15" y="15" width="30" height="30" rx="4" stroke="#F97316" strokeWidth="1.5" />
+              <rect x="20" y="20" width="20" height="20" rx="2" fill="#F97316" opacity="0.3" />
               {[0, 1, 2].map(n => (
                 <g key={n}>
-                  <line x1="15" y1={22 + n * 5} x2="8" y2={22 + n * 5} stroke="#22C55E" strokeWidth="1.2" />
-                  <line x1="45" y1={22 + n * 5} x2="52" y2={22 + n * 5} stroke="#22C55E" strokeWidth="1.2" />
-                  <line x1={22 + n * 5} y1="15" x2={22 + n * 5} y2="8" stroke="#22C55E" strokeWidth="1.2" />
-                  <line x1={22 + n * 5} y1="45" x2={22 + n * 5} y2="52" stroke="#22C55E" strokeWidth="1.2" />
+                  <line x1="15" y1={22 + n * 5} x2="8" y2={22 + n * 5} stroke="#F97316" strokeWidth="1.2" />
+                  <line x1="45" y1={22 + n * 5} x2="52" y2={22 + n * 5} stroke="#F97316" strokeWidth="1.2" />
+                  <line x1={22 + n * 5} y1="15" x2={22 + n * 5} y2="8" stroke="#F97316" strokeWidth="1.2" />
+                  <line x1={22 + n * 5} y1="45" x2={22 + n * 5} y2="52" stroke="#F97316" strokeWidth="1.2" />
                 </g>
               ))}
             </svg>
@@ -117,7 +117,7 @@ export default function LoginPage() {
           transform: 'translate(-50%, -50%)',
           width: 400,
           height: 400,
-          background: 'radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
@@ -141,7 +141,7 @@ export default function LoginPage() {
             border: '1px solid #2A2A35',
             borderRadius: 16,
             padding: '36px 32px',
-            boxShadow: '0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(34,197,94,0.1)',
+            boxShadow: '0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(249,115,22,0.1)',
           }}
         >
           {/* Logo */}
@@ -151,22 +151,22 @@ export default function LoginPage() {
                 width: 52,
                 height: 52,
                 borderRadius: 13,
-                backgroundColor: '#22C55E',
+                background: 'linear-gradient(135deg, #F97316 0%, #FB923C 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginBottom: 14,
-                boxShadow: '0 0 24px rgba(34,197,94,0.4)',
+                boxShadow: '0 0 24px rgba(249,115,22,0.45)',
               }}
             >
               <Cpu size={26} color="#fff" />
             </div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: 18, fontWeight: 700, color: '#F0F0F5', letterSpacing: '-0.02em', marginBottom: 3 }}>
-                Amazin<span style={{ color: '#22C55E' }}>Xpress</span>
+                Bhoomiputra
               </div>
               <div style={{ fontSize: 12, color: '#5A5A70', letterSpacing: '0.06em', textTransform: 'uppercase', fontWeight: 600 }}>
-                ERP Documentation Portal
+                OTT Project Proposal
               </div>
             </div>
           </div>
@@ -204,7 +204,7 @@ export default function LoginPage() {
                     transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
                     boxSizing: 'border-box',
                   }}
-                  onFocus={e => { e.target.style.borderColor = '#22C55E'; e.target.style.boxShadow = '0 0 0 3px rgba(34,197,94,0.12)'; }}
+                  onFocus={e => { e.target.style.borderColor = '#F97316'; e.target.style.boxShadow = '0 0 0 3px rgba(249,115,22,0.12)'; }}
                   onBlur={e => { e.target.style.borderColor = error ? '#EF4444' : '#2A2A35'; e.target.style.boxShadow = 'none'; }}
                 />
                 <button
@@ -239,7 +239,7 @@ export default function LoginPage() {
                 gap: 8,
                 width: '100%',
                 padding: '11px 16px',
-                backgroundColor: loading || !password.trim() ? '#1A1A24' : '#22C55E',
+                backgroundColor: loading || !password.trim() ? '#1A1A24' : '#F97316',
                 color: loading || !password.trim() ? '#5A5A70' : '#fff',
                 border: '1px solid transparent',
                 borderRadius: 8,
@@ -274,7 +274,7 @@ export default function LoginPage() {
           </form>
 
           <p style={{ fontSize: 11, color: '#5A5A70', textAlign: 'center', margin: '20px 0 0', lineHeight: 1.5 }}>
-            Internal access only. Unauthorized access is prohibited.
+            Confidential proposal. Shared with Sawgave Sir only.
           </p>
         </div>
       </motion.div>

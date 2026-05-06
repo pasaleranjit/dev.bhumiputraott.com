@@ -24,10 +24,9 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/knowledge-base', label: 'Knowledge Base', icon: BookOpen },
-  { href: '/tech-comparison', label: 'Tech Comparison', icon: GitCompare },
-  { href: '/roadmap', label: 'Roadmap', icon: Map },
-  { href: '/process', label: 'Business Process', icon: Milestone },
-  { href: '/playground', label: 'Playground', icon: Workflow },
+  { href: '/roadmap', label: 'Dev Roadmap', icon: Map },
+  { href: '/process', label: 'Business Flow', icon: Workflow },
+  { href: '/tech-comparison', label: 'Tech Stack', icon: GitCompare },
 ];
 
 // ─── Brand with INTERNAL badge ────────────────────────────────────────────────
@@ -39,30 +38,30 @@ function Brand() {
         <div
           style={{
             width: 36, height: 36, borderRadius: 8,
-            background: 'linear-gradient(135deg, #22C55E 0%, #4ADE80 100%)',
+            background: 'linear-gradient(135deg, #F97316 0%, #FB923C 100%)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             flexShrink: 0,
             fontSize: 17, fontWeight: 800, color: '#0A0A0F',
             letterSpacing: '-0.02em',
-            boxShadow: '0 2px 10px rgba(34,197,94,0.4)',
+            boxShadow: '0 2px 10px rgba(249,115,22,0.45)',
           }}
         >
-          A
+          B
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, minWidth: 0, flex: 1 }}>
           <span style={{ fontSize: 15, fontWeight: 700, color: '#F0F0F5', letterSpacing: '-0.01em' }}>
-            AmazinXpress
+            Bhoomiputra
           </span>
           <span
             style={{
-              fontSize: 9, fontWeight: 700, color: '#4ADE80',
-              backgroundColor: 'rgba(34,197,94,0.12)',
-              border: '1px solid rgba(34,197,94,0.3)',
+              fontSize: 9, fontWeight: 700, color: '#FB923C',
+              backgroundColor: 'rgba(249,115,22,0.12)',
+              border: '1px solid rgba(249,115,22,0.3)',
               padding: '2px 6px', borderRadius: 4,
               letterSpacing: '0.08em', flexShrink: 0,
             }}
           >
-            INTERNAL
+            PROPOSAL
           </span>
         </div>
       </div>
@@ -85,8 +84,8 @@ function NavLink({ item, isActive, onClick }: { item: NavItem; isActive: boolean
         fontSize: 13.5, fontWeight: isActive ? 600 : 500,
         color: isActive ? '#F0F0F5' : '#9090A8',
         textDecoration: 'none',
-        backgroundColor: isActive ? 'rgba(34,197,94,0.1)' : 'transparent',
-        border: `1px solid ${isActive ? 'rgba(34,197,94,0.2)' : 'transparent'}`,
+        backgroundColor: isActive ? 'rgba(249,115,22,0.1)' : 'transparent',
+        border: `1px solid ${isActive ? 'rgba(249,115,22,0.2)' : 'transparent'}`,
         transition: 'background-color 0.12s ease, color 0.12s ease',
       }}
       onMouseEnter={e => {
@@ -96,7 +95,7 @@ function NavLink({ item, isActive, onClick }: { item: NavItem; isActive: boolean
         if (!isActive) { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#9090A8'; }
       }}
     >
-      <Icon size={16} color={isActive ? '#22C55E' : '#5A5A70'} strokeWidth={2} />
+      <Icon size={16} color={isActive ? '#F97316' : '#5A5A70'} strokeWidth={2} />
       <span>{item.label}</span>
     </Link>
   );

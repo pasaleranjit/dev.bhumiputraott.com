@@ -2,8 +2,9 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { Menu, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { Menu, PanelLeftClose, PanelLeftOpen, Globe } from 'lucide-react';
 import { SearchTrigger } from './global-search';
+import { useLang } from '@/lib/lang-context';
 
 interface TopBarProps {
   onOpenMenu: () => void;
@@ -17,8 +18,9 @@ export const TOPBAR_HEIGHT = 56;
 const ROUTE_LABELS: Record<string, string> = {
   '/': 'Dashboard',
   '/knowledge-base': 'Knowledge Base',
-  '/tech-comparison': 'Tech Comparison',
-  '/roadmap': 'Roadmap',
+  '/tech-comparison': 'Tech Stack',
+  '/roadmap': 'Dev Roadmap',
+  '/process': 'Business Flow',
 };
 
 function Breadcrumb() {
@@ -42,7 +44,7 @@ function Breadcrumb() {
         onMouseEnter={e => { e.currentTarget.style.color = '#F0F0F5'; }}
         onMouseLeave={e => { e.currentTarget.style.color = '#9090A8'; }}
       >
-        AmazinXpress
+        Bhoomiputra OTT
       </Link>
       <span style={{ color: '#3A3A48', fontSize: 14 }}>/</span>
       <span
@@ -65,21 +67,56 @@ function StatusIndicator() {
       style={{
         alignItems: 'center', gap: 7, flexShrink: 0,
         padding: '5px 11px',
-        backgroundColor: 'rgba(245,158,11,0.08)',
-        border: '1px solid rgba(245,158,11,0.25)',
+        backgroundColor: 'rgba(249,115,22,0.08)',
+        border: '1px solid rgba(249,115,22,0.25)',
         borderRadius: 999,
       }}
     >
       <span
         style={{
-          width: 7, height: 7, borderRadius: '50%', backgroundColor: '#F59E0B',
-          boxShadow: '0 0 6px rgba(245,158,11,0.8)',
+          width: 7, height: 7, borderRadius: '50%', backgroundColor: '#F97316',
+          boxShadow: '0 0 6px rgba(249,115,22,0.8)',
         }}
       />
-      <span style={{ fontSize: 11.5, fontWeight: 600, color: '#FCD34D', whiteSpace: 'nowrap' }}>
-        Planning Phase
+      <span style={{ fontSize: 11.5, fontWeight: 600, color: '#FDBA74', whiteSpace: 'nowrap' }}>
+        Proposal Phase
       </span>
     </div>
+  );
+}
+
+function LanguageToggle() {
+  const { lang, toggle } = useLang();
+  return (
+    <button
+      onClick={toggle}
+      aria-label="Toggle language"
+      className="hidden sm:flex"
+      style={{
+        alignItems: 'center', gap: 5, flexShrink: 0,
+        padding: '5px 10px',
+        backgroundColor: '#17171E',
+        border: '1px solid #2A2A35',
+        borderRadius: 6,
+        color: '#9090A8',
+        fontSize: 11.5,
+        fontWeight: 600,
+        cursor: 'pointer',
+        transition: 'all 0.12s ease',
+        whiteSpace: 'nowrap',
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.backgroundColor = '#1E1E2A';
+        e.currentTarget.style.color = '#F97316';
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.backgroundColor = '#17171E';
+        e.currentTarget.style.color = '#9090A8';
+      }}
+    >
+      <Globe size={13} />
+      {lang === 'en' ? 'EN' : 'मराठी'}
+    </button>
   );
 }
 
@@ -146,6 +183,9 @@ export function TopBar({ onOpenMenu, onOpenSearch, onToggleDesktopSidebar, deskt
       <div style={{ flexShrink: 1, flexGrow: 1, minWidth: 0, maxWidth: 360 }}>
         <SearchTrigger onClick={onOpenSearch} />
       </div>
+
+      {/* Language toggle — hidden on narrow mobile */}
+      <LanguageToggle />
 
       {/* Status — hidden on narrow mobile */}
       <StatusIndicator />
