@@ -68,8 +68,8 @@ const NODE_H_WITH_CHANNELS = 250; // taller for intake step that lists parallel 
 const COL_GAP = 90;
 const ROW_BOB = 60; // vertical alternation to give the row a playful rhythm
 
-function getNodeHeight(step: ProcessStep) {
-  return step.channels && step.channels.length > 0 ? NODE_H_WITH_CHANNELS : NODE_H;
+function getNodeHeight(_step: ProcessStep) {
+  return NODE_H;
 }
 
 const PULSE_CSS = `
@@ -110,13 +110,16 @@ function StepNode({
   };
 }) {
   const { step, index, total, isActive, isReached } = data;
-  const Icon = ICONS[step.icon] ?? Milestone;
+  const accent = (step as any).accent ?? '#22C55E';
+  const icon = (step as any).icon ?? 'Milestone';
+  const emoji = (step as any).emoji ?? '📝';
+  const Icon = ICONS[icon] ?? Milestone;
 
-  const borderColor = isActive ? step.accent : isReached ? `${step.accent}aa` : '#1E1E2A';
+  const borderColor = isActive ? accent : isReached ? `${accent}aa` : '#1E1E2A';
   const boxShadow = isActive
-    ? `0 0 0 2px ${step.accent}, 0 0 36px ${step.accent}66, 0 0 80px ${step.accent}22`
+    ? `0 0 0 2px ${accent}, 0 0 36px ${accent}66, 0 0 80px ${accent}22`
     : isReached
-    ? `0 6px 22px ${step.accent}22`
+    ? `0 6px 22px ${accent}22`
     : '0 2px 10px rgba(0,0,0,0.3)';
   const bg = isActive ? '#14141C' : isReached ? '#111118' : '#0D0D13';
   const opacity = isReached || isActive ? 1 : 0.6;
@@ -146,12 +149,12 @@ function StepNode({
       <Handle
         type="target"
         position={Position.Left}
-        style={{ background: step.accent, width: 8, height: 8, border: 'none' }}
+        style={{ background: accent, width: 8, height: 8, border: 'none' }}
       />
       <Handle
         type="source"
         position={Position.Right}
-        style={{ background: step.accent, width: 8, height: 8, border: 'none' }}
+        style={{ background: accent, width: 8, height: 8, border: 'none' }}
       />
 
       {/* Step number pill */}
@@ -163,7 +166,7 @@ function StepNode({
           fontSize: 9,
           fontWeight: 700,
           letterSpacing: '0.1em',
-          color: step.accent,
+          color: accent,
           fontFamily: 'var(--font-mono)',
         }}
       >
@@ -180,11 +183,11 @@ function StepNode({
             width: 18,
             height: 18,
             borderRadius: '50%',
-            background: step.accent,
+            background: accent,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: `0 0 10px ${step.accent}aa`,
+            boxShadow: `0 0 10px ${accent}aa`,
           }}
         >
           <Check size={11} color="#0A0A0F" strokeWidth={4} />
@@ -198,7 +201,7 @@ function StepNode({
           width: 58,
           height: 58,
           borderRadius: 14,
-          background: `radial-gradient(circle at 30% 30%, ${step.accent}33 0%, ${step.accent}0d 60%, transparent 100%)`,
+          background: `radial-gradient(circle at 30% 30%, ${accent}33 0%, ${accent}0d 60%, transparent 100%)`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -209,11 +212,11 @@ function StepNode({
           style={{
             fontSize: 38,
             lineHeight: 1,
-            filter: isActive ? `drop-shadow(0 0 14px ${step.accent}cc)` : 'none',
+            filter: isActive ? `drop-shadow(0 0 14px ${accent}cc)` : 'none',
             transition: 'filter 0.3s ease',
           }}
         >
-          {step.emoji}
+          {emoji}
         </span>
         <div
           style={{
@@ -224,14 +227,14 @@ function StepNode({
             height: 22,
             borderRadius: '50%',
             background: '#0A0A0F',
-            border: `1.5px solid ${step.accent}`,
+            border: `1.5px solid ${accent}`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: isActive ? `0 0 10px ${step.accent}aa` : 'none',
+            boxShadow: isActive ? `0 0 10px ${accent}aa` : 'none',
           }}
         >
-          <Icon size={11} color={step.accent} strokeWidth={2.5} />
+          <Icon size={11} color={accent} strokeWidth={2.5} />
         </div>
       </div>
 
